@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 
+        range：默认值永远在中间，默认最大值是100，默认最小值是0
+
+        max:改最大值
+        min：改最小值
+        value：默认值
+
+        值只是整数，没有小数
+
+        视频音量：
+            视频.volume 值在0-1之间，可以有小数，默认是1
+     -->
+</head>
+<body>
+    <video src="video/movie01.mp4" controls></video>
+    <!-- 0,1,2,3,4,5,6,7,8,9,10 如何转成0到1之间，就除以10 -->
+    <input type="range" id="range" max="10"> 
+    <input type="button" value="获取滑块当前的值" id="btn">
+
+    <!-- 让大家知道如何设置视频的音量，并且演示出视频音量的值只在0到1之间 -->
+    <input type="button" value="设置视频音量到0" id="btn2">
+    <input type="button" value="设置视频音量到1" id="btn3">
+    <input type="button" value="设置视频音量到10" id="btn4">
+    <input type="button" value="设置视频音量到0.5" id="btn5">
+</body>
+</html>
+
+<script>
+    var range = document.getElementById('range');
+    //找到视频
+    var video = document.querySelector('video');
+
+    document.getElementById('btn').onclick = function(){
+
+        console.log(range.value);
+        
+    }
+
+    // 音量设置为0
+    document.getElementById('btn2').onclick = function(){
+
+        video.volume = 0;
+    }
+
+    // 音量设置为1
+    document.getElementById('btn3').onclick = function(){
+
+        video.volume = 1;
+    }
+
+    // 音量设置为10
+    document.getElementById('btn4').onclick = function(){
+
+        video.volume = 10;
+    }
+
+
+    // 音量设置为0.5
+    document.getElementById('btn5').onclick = function(){
+
+        video.volume = 0.5;
+    }
+
+    // 进度条值改变事件
+    range.onchange = function(){
+
+        //获取当前的进度条的值，赋值给视频
+        video.volume = this.value / 10;
+    }
+</script>

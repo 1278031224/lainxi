@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+
+    <style>
+        body {
+            background-color: #000;
+        }
+
+        .player {
+
+            width: 600px;
+            height: 420px;
+            border: 1px solid #fff;
+            margin: 100px auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        video {
+            width: 100%;
+        }
+
+        .controls {
+
+            width: 100%;
+            flex: 1;
+            /* background-color: #fff; */
+
+            display: flex;
+        }
+
+        .controls a {
+            width: 60px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+
+            font-size: 25px;
+            color: white;
+
+            /* -webkit-animation:  */
+            /* -moz-animation: */
+        }
+
+        .progress {
+
+            flex: 1;
+            background-color: #f00;
+            background-color: #fff;
+        }
+
+        .son{
+            width: 0%;
+            height: 100%;
+            background-color: gray;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="player">
+        <video src="video/movie01.mp4"></video>
+
+
+        <div class="controls">
+            <a id="play" href="javascript:void(0)" class="fa fa-play"></a>
+            <div class="progress">
+                <div class="son"></div>
+            </div>
+            <input type="range" id="range" max="10" value="10"/>
+            <a id="full" href="javascript:void(0)" class="fa fa-arrows-alt"></a>
+
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    //找到video
+    var video = document.querySelector('video');
+    //找到进度条的子元素
+    var son = document.querySelector('.son');
+    //找到进度条
+    var progress = document.querySelector('.progress');
+    //找到滑块
+    var range = document.getElementById('range');
+
+    //找到播放
+    document.getElementById('play').onclick = function () {
+
+        if (this.classList.contains('fa-play')) {
+            // 播放
+            video.play();
+            // 把图标替换为暂停
+            this.classList.replace('fa-play', 'fa-pause');
+        } else {
+            // 暂停
+            video.pause();
+            this.classList.replace('fa-pause', 'fa-play');
+        }
+    }
+
+    //找到全屏
+    document.getElementById('full').onclick = function(){
+
+        // 这个方法之前还算实验室中的方法
+        // 实验中的方法：没有加入到正式标准里，但是已经确定在下一个标准一定会加入的属性或者方法，就叫实验室中的属性和方法
+        // 这个时候这些方法对于浏览器还只是在试验（测试阶段），那么这种情况，如果想用，要加浏览器前缀
+        // 代表调用这个浏览器自己私下测试的方法
+
+        video.requestFullscreen();
+
+        // video.webkitRequestFullScreen();
+        // video.mozRequestFullScreen();
+        // video.msRequestFullscreen();
+    }
+
+
+    // 给视频加的视频更新时间：只要视频在播放就不断的触发，暂停不触发（只要视频播放时间就在变，只要暂停时间就不会变）
+    video.ontimeupdate = function(){
+
+        // console.log('....');
+        // 给进度条加宽度代码写在这里面就行了
+
+        /*
+          进度条宽度 = 视频当前时间 / 视频总时长 * 100 + %
+        */
+        // console.log(video.currentTime, video.duration);
+
+        son.style.width = video.currentTime / video.duration * 100 + "%";
+        
+    }
+
+
+    // 给进度条加点击事件
+    progress.onclick = function(e){
+
+        e = e || window.event;
+        //获得相对于自身的x
+        // console.log(e.offsetX);
+        console.log(this.offsetWidth);
+        
+        
+        //相对于自身x / 自己的宽度 * 视频总时长 把结果给视频的 当前时间
+        video.currentTime = e.offsetX / this.offsetWidth * video.duration;
+    }
+    
+
+    range.onchange = function(){
+
+        video.volume = this.value / 10;
+    }
+</script>

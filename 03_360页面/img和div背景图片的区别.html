@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+
+    <!-- 
+
+        什么时候用div显示，什么时候用img显示
+
+        用div的情况
+                1.如果一张图片里还要包含另外一张图片，用div
+                2.如果希望图片只显示图片中的某一个部分，那么用div(精灵图)
+                3.如果希望一点一点的出来或者一点一点的缩小，用div（img会整体放大和缩小）
+
+        用img的情况
+                1.如果希望图片整体放大或缩小就用img
+                2.如果图片里不需要包含另一张图片，并且不需要只显示某一部分，那么用img，因为img有个好处，省略写宽高的过程，它会默认以图片的宽高，给了宽会自动计算高，同样给了高也会自动计算宽
+    -->
+
+    <style>
+        body{
+            background-color: #000;
+        }
+
+        img{
+            width: 99px;
+        }
+
+        .box{
+            width: 99px;
+            height: 21px;
+            background: url(images/key.png) no-repeat;
+        }
+    </style>
+</head>
+<body>
+    
+    <img src="images/key.png" alt="">
+
+    <div class="box"></div>
+</body>
+</html>

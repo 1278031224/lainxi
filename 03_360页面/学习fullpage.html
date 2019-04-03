@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <!-- 
+        使用fullpage三大步：
+                1.导入文件
+                        fullpage.css  jQuery.js fullpage.js
+
+
+                2.准备HTML
+                        一个大div，里面有好几个类叫section的小div,有几个section就代表有几屏
+
+
+                3.调用初始化代码
+                        找到大div，调用fullpage方法
+                    
+
+     -->
+    <link rel="stylesheet" href="css/jquery.fullpage.min.css">
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <!-- 记得要先导入jQuery -->
+    <script src="js/jquery.fullPage.min.js"></script>
+
+</head>
+
+<body>
+
+    <div id="itcast">
+        <!-- 这种叫section的小div有几个，就代表有几屏 -->
+        <div class="section section1">
+            <h3>第一屏</h3>
+        </div>
+
+        <div class="section section2">
+            <h3>第二屏</h3>
+        </div>
+
+        <div class="section section3">
+            <h3>第三屏</h3>
+        </div>
+
+        <div class="section section4">
+            <h3>第四屏</h3>
+        </div>
+
+        <div class="section section5">
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia nulla fuga dolores explicabo molestiae facere tempore perspiciatis eveniet reiciendis accusamus illum omnis maxime temporibus neque, culpa ad voluptatibus consequatur aliquid.</p>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
+
+<script>
+    // 把这个大div里的这些小div变成一屏一屏的页面
+    $('#itcast').fullpage({
+        // 是否显示导航，默认为false
+        navigation:true,
+        // 内容是否垂直居中，默认为true
+        // verticalCentered:false,
+        loopBottom:true,
+        loopTop:true,
+        // 设置每一屏的背景颜色
+        // 数组中每个元素跟屏数一一对应：即第一个元素对应第一屏，第二个元素对应第二屏，依次类推
+        sectionsColor:['red','blue','green','orange','yellow'],
+        // 滚动完成后触发的事件
+        // 参数1暂时没什么用
+        // 参数2代表滚出来的页码数，代表它是第几页，从1开始
+        afterLoad:function(a,index){
+
+            console.log('滚完了');
+            // console.log(a);
+            // console.log(index);
+            
+        },
+        // 开始滚动调用
+        // 参数1：当前页
+        // 参数2：要滚到的那一页页码
+        // 参数3：方向
+        onLeave:function(index,nextIndex,direction){
+
+            console.log(index,nextIndex,direction);
+            
+        }
+    });
+</script>

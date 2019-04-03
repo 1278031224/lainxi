@@ -1,0 +1,52 @@
+/* 
+
+    如果你的元素要参照背景图片来放它的位置，那么就应该背景图片怎么布局，你就怎么布局
+
+    意思是：如果背景图片水平居中，你也要保证水平居中
+           如果背景图片底部对齐，你也要保证底部对齐
+
+           这样才能保证不管屏幕大小怎么变化，你永远都在图片对应的某个位置上
+*/
+
+.section1{
+
+    background: url(../images/01/bg.png) no-repeat center bottom;
+}
+
+
+.section1 .sofa{
+    position: absolute;
+    left:50%;
+    margin-left: -150px;
+    bottom: 0;
+    margin-bottom: 330px;
+    animation: shake 1s alternate infinite;
+}
+
+.section1 .ball{
+
+    position: absolute;
+    left:50%;
+    margin-left: 100px;
+    bottom: 0;
+    margin-bottom: 430px;
+    animation: shake 1.3s alternate infinite;
+}
+
+.section1 .products{
+
+    position: absolute;
+    left:50%;
+    margin-left: -380px;
+    bottom: 0;
+    margin-bottom: 150px;
+}
+
+
+@keyframes shake{
+
+    from{}
+    to{
+        transform: translateY(-80px);
+    }
+}
